@@ -1,6 +1,6 @@
 import pandas as pd
 
-df_basinc = pd.read_csv("data/weather_datas/basinc.csv")
+df_basinc = pd.read_csv('data/weather_datas/basinc.csv')
 df_bulut = pd.read_csv('data/weather_datas/bulut.csv')
 df_nem = pd.read_csv('data/weather_datas/nem.csv')
 df_ruzgar = pd.read_csv('data/weather_datas/ruzgar_hizi_yonu.csv')
