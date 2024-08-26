@@ -18,6 +18,9 @@ for i in tables:
 df = real_df.copy()
 df = df.dropna()
 
+df_mean = df['Basinc'].mean()
+df_std = df['Basinc'].std()
+
 df_st = pd.DataFrame(preprocessing.scale(df.select_dtypes('float64')), columns=ctable)
 for i in ctable:
     df[i] = df_st[i]
