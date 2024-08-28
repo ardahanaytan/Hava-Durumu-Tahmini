@@ -1,5 +1,4 @@
 import pandas as pd
-#from sklearn import preprocessing
 
 df_basinc = pd.read_csv('data/weather_datas/basinc.csv')
 df_bulut = pd.read_csv('data/weather_datas/bulut.csv')
@@ -19,8 +18,6 @@ for i in tables:
 df = real_df.copy()
 df = df.dropna()
 
-#df_st = pd.DataFrame(preprocessing.scale(df.select_dtypes('float64')), columns=ctable)
-
 df['Yil'] = df['Yil'].str[1:].astype(int)
 df['Ay'] = df['Ay'].map({
     'Ocak': 1, 'Şubat': 2, 'Mart': 3, 'Nisan': 4, 'Mayıs': 5, 'Haziran': 6,
@@ -29,7 +26,8 @@ df['Ay'] = df['Ay'].map({
 df['Gun'] = df['Gun'].str[1:].astype(int)
 df['Saat'] = df['Saat'].str[1:].str[:2].astype(int)
 
-df['datetime'] = pd.to_datetime(df[['Yil', 'Ay', 'Gun']].astype(str).agg('-'.join, axis=1) + ' ' + df['Saat'].astype(str), format='%Y-%m-%d %H')
+df['datetime'] = pd.to_datetime(df[['Yil', 'Ay', 'Gun']].astype(str).agg('-'.join, axis=1) + ' ' + 
+                                df['Saat'].astype(str), format='%Y-%m-%d %H')
 df.set_index('datetime', inplace=True)
 df.drop(columns=['Yil', 'Ay', 'Gun', 'Saat'], inplace=True)
 df.columns = ctable
