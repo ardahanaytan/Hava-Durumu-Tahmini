@@ -23,8 +23,6 @@ def create_predictions(df):
 
 
 
-
-
 def create_predictions_mean(df):
     df['target'] = df.shift(-1)['mean']
     df = df.iloc[:-1,:].copy()
@@ -79,3 +77,5 @@ def arima_model(df_t):
     fc_series = pd.Series(fc, index=test_df.index)
     error = mean_absolute_error(test_df, fc_series)
     return error, fc_series
+
+
