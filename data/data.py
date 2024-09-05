@@ -13,6 +13,8 @@ df = pd.merge(df_basinc, df_bulut, on=['Zaman'])
 for i in tables:
     df = pd.merge(df, i, on=['Zaman'])
 
+df = df.dropna()
+
 df['Yil'] = df['Zaman'].str[:4].astype(int)
 df['Ay'] = df['Zaman'].str[4:6].astype(int)
 df['Gun'] = df['Zaman'].str[6:8].astype(int)
