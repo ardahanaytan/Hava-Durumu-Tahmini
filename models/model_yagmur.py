@@ -15,6 +15,4 @@ df_ort = df_y.resample('D').mean()
 df_ort.rename(columns = {'Yagmur': 'mean'}, inplace=True)
 df_ = pd.concat([df_top, df_ort, df_max, df_min], axis=1)
 
-error, combined = create_predictions(df_)
-
-combined['predictions'] -= combined['predictions'].min()
+error, combined, future = create_predictions(df_)

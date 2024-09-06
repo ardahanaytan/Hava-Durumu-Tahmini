@@ -15,4 +15,5 @@ df_sum = df_y.resample('D').sum()
 df_sum.rename(columns = {'Ruzgar_Hizi': 'sum'}, inplace=True)
 df_ = pd.concat([df_sum, df_ort, df_max, df_min], axis=1)
 
-error, combined = create_predictions_mean(df_)
+error, combined, future = create_predictions_mean(df_)
+#VERILER GUNCELLENDIKTEN SONRA TEKRAR BAKILACAK

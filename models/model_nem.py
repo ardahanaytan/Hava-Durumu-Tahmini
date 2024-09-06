@@ -13,4 +13,7 @@ df_ort = df_y.resample('D').mean()
 df_ort.rename(columns = {'Nem': 'mean'}, inplace=True)
 df_ = pd.concat([df_ort, df_max, df_min], axis=1)
 
-error, combined = create_predictions_withoutsum(df_)
+error, combined, future = create_predictions_withoutsum(df_)
+#future[['yhat_lower', 'yhat_upper', 'yhat']] -= 45
+#TAM OLARAK OLMAMIS BI KONTROL EDILECEK
+#YENI VERILER ILE DAHA IYI OLABILIR VERILERIN BITTIGI HAFTA NEM COK YUKSEKMIS, MODELDE DAHA DA YUKSELMEYE DEVAM EDIYOR

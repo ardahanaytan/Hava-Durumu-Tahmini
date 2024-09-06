@@ -15,6 +15,5 @@ df_ort = df_y.resample('D').mean()
 df_ort.rename(columns = {'Bulut': 'mean'}, inplace=True)
 df_ = pd.concat([df_top, df_ort, df_max, df_min], axis=1)
 
-error, combined = create_predictions_mean(df_)
-combined['predictions'] -= 13
-combined['predictions'] *= 1.4
+error, combined, future = create_predictions_mean(df_)
+future[['yhat_lower', 'yhat_upper', 'yhat']] -= future['yhat_lower'].min()

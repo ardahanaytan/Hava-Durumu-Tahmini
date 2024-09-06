@@ -13,5 +13,4 @@ df_ort = df_y.resample('D').mean()
 df_ort.rename(columns = {'Basinc': 'mean'}, inplace=True)
 df_ = pd.concat([df_ort, df_max, df_min], axis=1)
 
-error, combined = create_predictions_withoutsum(df_)
-#print(future)
+error, combined, future = create_predictions_withoutsum(df_)
