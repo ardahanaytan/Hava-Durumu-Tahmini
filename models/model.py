@@ -4,9 +4,6 @@ from sklearn.metrics import mean_absolute_error
 reg = Ridge(alpha=.1)
 from prophet import Prophet
 
-
-
-
 def create_predictions(df):
     df['target'] = df.shift(-1)['sum']
     df = df.iloc[:-1,:].copy()
@@ -22,9 +19,6 @@ def create_predictions(df):
     forecast = future_predict(combined)
     return error, combined, forecast
 
-
-
-
 def create_predictions_mean(df):
     df['target'] = df.shift(-1)['mean']
     df = df.iloc[:-1,:].copy()
@@ -38,13 +32,6 @@ def create_predictions_mean(df):
     combined.columns = ['actual', 'predictions']
     forecast = future_predict(combined)
     return error, combined, forecast
-
-
-
-
-
-
-
 
 def create_predictions_withoutsum(df):
     df['target'] = df.shift(-1)['max']
@@ -63,9 +50,6 @@ def create_predictions_withoutsum(df):
     combined.columns = ['actual', 'predictions']
     forecast = future_predict(combined)
     return error, combined, forecast
-
-
-
 
 def future_predict(combined):
     m = Prophet()
