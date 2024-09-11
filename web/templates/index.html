@@ -1,11 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% include 'head_links.html' %}
+
     <title>HavAI Durumu</title>
 </head>
+
 <body>
-    <h3>Ilk Web Sayfasi</h3>
+    {% include 'body_links.html' %}
+
+    <nav class="navbar bg-dark border-bottom border-body" data-bs-theme="dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">
+              <img src="../assets/favicon.ico" alt="Logo" width="16" height="16" class="d-inline-block align-text-top">
+              HavAI Durumu
+            </a>
+          </div>
+    </nav>
+
+    <img src="../assets/logo.png" class="img-thumbnail" alt="haha">
 </body>
 </html>
