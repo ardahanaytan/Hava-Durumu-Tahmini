@@ -2,22 +2,50 @@
 <html lang="en">
 <head>
     {% include 'head_links.html' %}
-
+    <link rel="icon" type="image/icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
     <title>HavAI Durumu</title>
+    <style>
+        body {
+            background-color: #222529;
+        }
+        .navbar-brand {
+            margin-left: 4rem; 
+        }
+        .navbar-nav {
+            margin-right: 10rem;
+        }
+        .disabled-text {
+            pointer-events: none;
+        }
+        .icon-adjust {
+            vertical-align: middle;
+            position: relative;
+            top: -2px;
+        }
+    </style>
 </head>
 
 <body>
     {% include 'body_links.html' %}
 
-    <nav class="navbar bg-dark border-bottom border-body" data-bs-theme="dark">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="/">
-              <img src="../assets/favicon.ico" alt="Logo" width="16" height="16" class="d-inline-block align-text-top">
-              HavAI Durumu
-            </a>
+          <a class="navbar-brand" href="/"> <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo" width="30" height="24" class="d-inline-block align-text-top"> HavAI Durumu</a>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Şehir
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="/"><img src="{{ url_for('static', filename='images/ch.png') }}" class="icon-adjust" width="16" height="16">  Basel</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item disabled-text" href="#">Başka bir şehir yok.</a></li>
+                </ul>
+              </li>
+            </ul>
           </div>
-    </nav>
-
-    <img src="../assets/logo.png" class="img-thumbnail" alt="haha">
+        </div>
+      </nav>
 </body>
 </html>
