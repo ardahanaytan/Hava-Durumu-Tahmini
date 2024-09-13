@@ -52,8 +52,8 @@
             align-items: center;
         }
         .image-wrapper {
-            width: 100px; /* Yuvarlak çerçeve genişliği */
-            height: 100px; /* Yuvarlak çerçeve yüksekliği */
+            width: 120px; /* Yuvarlak çerçeve genişliği */
+            height: 120px; /* Yuvarlak çerçeve yüksekliği */
             border-radius: 50%; /* Yuvarlak yapar */
             overflow: hidden; /* Görüntünün dışarı taşmasını engeller */
             display: flex;
@@ -67,11 +67,50 @@
             width: 100%;
             height: auto;
         }
+        .text-section {
+            height: 110px;
+            margin-left: 15px;
+            display: flex;
+            flex-direction: row; /* Yan yana hizalama */
+            gap: 10px; /* Dikdörtgenler arasında boşluk */
+            flex: 1; /* Kalan alanı kaplar */
+        }
+        .text-box {
+            font-size: 15px; /* Yazı boyutu */
+            background-color: #727375; /* Arka plan rengi */
+            padding: 5px; 
+            border-radius: 5px; /* Kenarları yuvarlat */
+            flex: 1; /* Her bir kutu eşit genişlikte olur */
+            text-align: center; /* Yazıları ortalar */
+        }
+        .text-box p {
+            margin: 5px 0; /* Üst ve alt margin'i 5px'e düşürüyoruz */
+        }
+        .text-box .value{
+            font-family: 'Lato', sans-serif;
+            font-size: 50px;
+            font-weight: bold;
+            color: rgba(255, 255, 255, 0.812);
+            margin: 12px; /* Ekstra margin kaldırıldı */
+            line-height: 1; /* Satır yüksekliğini sıkılaştır */
+        }
+        .text-box .value2{
+            font-family: 'Lato', sans-serif;
+            font-size: 35px;
+            font-weight: bold;
+            color: rgba(255, 255, 255, 0.812);
+            margin: 20px; /* Ekstra margin kaldırıldı */
+            line-height: 1; /* Satır yüksekliğini sıkılaştır */
+        }
+        .text-box img {
+            margin: 10px; /* Ekstra margin kaldırıldı */
+            line-height: 1; /* Satır yüksekliğini sıkılaştır */
+        }
         .custom-box .box-content-2 {
             margin-top: 2px;
             padding: 10px;
             background-color: #727375; 
-            height: 120px;
+            height: 130px;
             font-size: 20px;
             display: flex;
             justify-content: center;
@@ -110,6 +149,12 @@
             cursor: pointer; /* Buton üzerinde fare imlecini göster */
             font-size: 16px; /* Buton yazı boyutu */
         }
+        .day img {
+            margin-top: 20px;
+            margin-bottom: 20px;
+            width: 50px;
+            height: 50px;
+        }
     </style>
 </head>
 
@@ -118,7 +163,7 @@
 
     <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
         <div class="container-fluid">
-          <a class="navbar-brand" href="/"> <img src="{{ url_for('static', filename='images/cloudy.png') }}" alt="Logo" width="42" height="42" class="d-inline-block align-bottom"> HavAI Durumu</a>
+          <a class="navbar-brand" href="/"> <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo" width="42" height="42" class="d-inline-block align-bottom"> HavAI Durumu</a>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item dropdown">
@@ -126,7 +171,14 @@
                   Şehir
                 </a>
                 <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="/amsterdam"><img src="{{ url_for('static', filename='images/nl.png') }}" class="icon-adjust" width="16" height="16">  Amsterdam</a></li>
                   <li><a class="dropdown-item" href="/"><img src="{{ url_for('static', filename='images/ch.png') }}" class="icon-adjust" width="16" height="16">  Basel</a></li>
+                  <li><a class="dropdown-item" href="/berlin"><img src="{{ url_for('static', filename='images/de.png') }}" class="icon-adjust" width="16" height="16">  Berlin</a></li>
+                  <li><a class="dropdown-item" href="/istanbul"><img src="{{ url_for('static', filename='images/tr.png') }}" class="icon-adjust" width="16" height="16">  İstanbul</a></li>
+                  <li><a class="dropdown-item" href="/londra"><img src="{{ url_for('static', filename='images/gb.png') }}" class="icon-adjust" width="16" height="16">  Londra</a></li>
+                  <li><a class="dropdown-item" href="/madrid"><img src="{{ url_for('static', filename='images/es.png') }}" class="icon-adjust" width="16" height="16">  Madrid</a></li>
+                  <li><a class="dropdown-item" href="/paris"><img src="{{ url_for('static', filename='images/fr.png') }}" class="icon-adjust" width="16" height="16">  Paris</a></li>
+                  <li><a class="dropdown-item" href="/roma"><img src="{{ url_for('static', filename='images/it.png') }}" class="icon-adjust" width="16" height="16">  Roma</a></li>
                   <li><hr class="dropdown-divider"></li>
                   <li><a class="dropdown-item disabled-text" href="#">Başka bir şehir yok.</a></li>
                 </ul>
@@ -160,21 +212,56 @@
                     </div>
                     <div class="box-content">
                       <div class="image-wrapper">
-                        <img src="{{ url_for('static', filename='images/cloudy.png') }}" alt="admin" class="img-fluid">
+                        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="admin" class="img-fluid">
+                      </div>
+                      <div class="text-section">
+                        <div class="text-box">
+                            <p>Sıcaklık (°C)</p>
+                            <p class="value"> 25 </p>
+                        </div>
+                        <div class="text-box">
+                            <p>Nem (%)</p>
+                            <p class="value"> 55 </p>
+                        </div>
+                        <div class="text-box">
+                            <p>Bulut Yoğunluğu (%)</p>
+                            <p class="value"> 12 </p>
+                        </div>
                       </div>
                     </div>
                     <div class="box-content-2">
-                      <img src="{{ url_for('static', filename='images/cloudy.png') }}" alt="admin" class="img-fluid">
+                      <div class="text-section">
+                        <div class="text-box">
+                            <p>Basınç (hPa)</p>
+                            <p class="value2"> 1010 </p>
+                        </div>
+                        <div class="text-box">
+                            <p>Yağmur Miktarı (%)</p>
+                            <p class="value2"> 1.2 </p>
+                        </div>
+                        <div class="text-box">
+                            <p>Kar Miktarı (%)</p>
+                            <p class="value2"> 0 </p>
+                        </div>
+                        <div class="text-box">
+                            <p>Rüzgar Hızı (km/h)</p>
+                            <p class="value2"> 14 </p>
+                        </div>
+                        <div class="text-box">
+                            <p>Rüzgar Yönü</p>
+                            <img src="{{ url_for('static', filename='images/arrow-up.png') }}" alt="admin" class="img-fluid">
+                        </div>
+                      </div>
                   </div>
                   <div class="box-content-3">
                     <div class="days">
-                      <button class="day">Mon<br>25°C</button>
-                      <button class="day">Tue<br>28°C</button>
-                      <button class="day">Wed<br>30°C</button>
-                      <button class="day">Thu<br>27°C</button>
-                      <button class="day">Fri<br>26°C</button>
-                      <button class="day">Sat<br>29°C</button>
-                      <button class="day">Sun<br>24°C</button>
+                      <button class="day">Pzt<br><img src="{{ url_for('static', filename='images/logo.png') }}" alt="admin" class="img-fluid"><br>25°C</button>
+                      <button class="day">Sal<br><img src="{{ url_for('static', filename='images/logo.png') }}" alt="admin" class="img-fluid"><br>28°C</button>
+                      <button class="day">Çar<br><img src="{{ url_for('static', filename='images/logo.png') }}" alt="admin" class="img-fluid"><br>30°C</button>
+                      <button class="day">Per<br><img src="{{ url_for('static', filename='images/logo.png') }}" alt="admin" class="img-fluid"><br>27°C</button>
+                      <button class="day">Cum<br><img src="{{ url_for('static', filename='images/logo.png') }}" alt="admin" class="img-fluid"><br>26°C</button>
+                      <button class="day">Cmt<br><img src="{{ url_for('static', filename='images/logo.png') }}" alt="admin" class="img-fluid"><br>29°C</button>
+                      <button class="day">Paz<br><img src="{{ url_for('static', filename='images/logo.png') }}" alt="admin" class="img-fluid"><br>24°C</button>
                     </div>
                   </div>
                 </div>
