@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include 'head_links.html' %}
+    <link rel="icon" type="image/icon" href="{{ url_for('static', filename='images/cloudy.png') }}">
+    <title>HavAI Durumu</title>
+    <style>
+        body {
+            background-color: #222529;
+        }
+        .navbar-brand {
+            margin-left: 4rem;
+            font-size: 1.8rem;
+        }
+        .navbar-nav {
+            margin-left: 2rem;
+            font-size: 1.5rem;
+        }
+        .navbar-nav .nav-link {
+            margin-left: 30px;
+        }
+        .disabled-text {
+            pointer-events: none;
+        }
+        .icon-adjust {
+            vertical-align: middle;
+            position: relative;
+            top: -2px;
+        }
+        li::marker {
+            color: #2c3035;
+        }
+        .navbar-link2 {
+            margin-right: 4rem;
+        }
+        .custom-box {
+            border: 3px solid #727375; 
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .custom-box .box-header {
+            background-color: #727375; 
+            color: white;
+            padding: 10px;
+            font-size: 1.25rem;
+            text-align: center;
+        }
+        .custom-box .box-content {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #727375; 
+            height: 130px;
+            font-size: 20px;
+            display: flex; 
+            align-items: center;
+        }
+        .image-wrapper {
+            width: 120px; /* Yuvarlak çerçeve genişliği */
+            height: 120px; /* Yuvarlak çerçeve yüksekliği */
+            border-radius: 50%; /* Yuvarlak yapar */
+            display: flex;
+            align-items: center;
+            justify-content: center; /* Görüntüyü merkezler */
+            margin-left: 25px;
+        }
+
+        .image-wrapper img {
+            width: 100%;
+            height: auto;
+        }
+        .text-section {
+            height: 110px;
+            width: 100%;
+            margin-left: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        .text-section p {
+            margin: 0;
+            font-size: 40px;
+            color: rgba(255, 255, 255, 0.812);
+        }
+        .text-box img {
+            margin: 10px; /* Ekstra margin kaldırıldı */
+            line-height: 1; /* Satır yüksekliğini sıkılaştır */
+        }
+        .days {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+        }
+        .day {
+            margin-top: 10px;
+            flex: 1;
+            height: 200px;
+            text-align: center;
+            padding: 10px;
+            color : rgba(255, 255, 255, 0.812);
+            background-color: #727375; /* Butonların arka plan rengi */
+            border: none;
+            cursor: pointer; /* Buton üzerinde fare imlecini göster */
+            font-size: 16px; /* Buton yazı boyutu */
+        }
+        .day img {
+            margin-top: 20px;
+            margin-bottom: 20px;
+            width: 50px;
+            height: 50px;
+        }
+        .temp-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .temperature {
+            font-size: 20px;
+            font-weight: bold;
+            color: rgba(255, 255, 255, 0.812);
+        }
+        .mintemp {
+            font-size: 15px;
+            font-weight: bold;
+            color: rgba(255, 255, 255, 0.512);
+        }
+    </style>
+</head>
+<body>
+    {% include 'body_links.html' %}
+
+    {% include 'navbar.html' %}
+
+    <div class="container" style="margin-top: 40px;"></div>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="custom-box">
+                    <div class="box-header">
+                      <a><img src="{{ url_for('static', filename='images/it.png') }}" class="d-inline-block align-text-bottom" width="25" height="25">  Roma Hava Durumu</a>
+                    </div>
+                    <div class="box-content">
+                        <div class="image-wrapper">
+                            <img src="{{ url_for('static', filename='images/severe-weather.png') }}" alt="admin" class="img-fluid">
+                        </div>
+                        <div class="text-section">
+                            <p>Henüz veri bulunmamaktadır.</p>
+                        </div>
+                    </div>
+                  <div class="box-content-3">
+                    <div class="days">
+                      <button class="day">Pzt<br>
+                        <img src="{{ url_for('static', filename='images/severe-weather.png') }}" alt="admin" class="img-fluid">
+                        <div class="temp-container">
+                          <span class="temperature">X°C</span>
+                          <span class="mintemp">X°C</span>
+                        </div>
+                      </button>
+                      <button class="day">Sal<br>
+                        <img src="{{ url_for('static', filename='images/severe-weather.png') }}" alt="admin" class="img-fluid">
+                        <div class="temp-container">
+                          <span class="temperature">X°C</span>
+                          <span class="mintemp">X°C</span>
+                        </div>
+                      </button>
+                      <button class="day">Çarş<br>
+                        <img src="{{ url_for('static', filename='images/severe-weather.png') }}" alt="admin" class="img-fluid">
+                        <div class="temp-container">
+                          <span class="temperature">X°C</span>
+                          <span class="mintemp">X°C</span>
+                        </div>
+                      </button>
+                      <button class="day">Perş<br>
+                        <img src="{{ url_for('static', filename='images/severe-weather.png') }}" alt="admin" class="img-fluid">
+                        <div class="temp-container">
+                          <span class="temperature">X°C</span>
+                          <span class="mintemp">X°C</span>
+                        </div>
+                      </button>
+                      <button class="day">Cum<br>
+                        <img src="{{ url_for('static', filename='images/severe-weather.png') }}" alt="admin" class="img-fluid">
+                        <div class="temp-container">
+                          <span class="temperature">X°C</span>
+                          <span class="mintemp">X°C</span>
+                        </div>
+                      </button>
+                      <button class="day">Cmt<br>
+                        <img src="{{ url_for('static', filename='images/severe-weather.png') }}" alt="admin" class="img-fluid">
+                        <div class="temp-container">
+                          <span class="temperature">X°C</span>
+                          <span class="mintemp">X°C</span>
+                        </div>
+                      </button>
+                      <button class="day">Paz<br>
+                        <img src="{{ url_for('static', filename='images/severe-weather.png') }}" alt="admin" class="img-fluid">
+                        <div class="temp-container">
+                          <span class="temperature">X°C</span>
+                          <span class="mintemp">X°C</span>
+                        </div>
+                      </button>
+                    </div>
+                  </div>
+                
+                </div>
+            </div>
+      </div>
+    </div>
+</body>
+</html>

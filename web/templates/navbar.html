@@ -1,0 +1,44 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/"> <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo" width="42" height="42" class="d-inline-block align-bottom"> HavAI Durumu</a>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item button">
+            <a class="nav-link button-toggle" href="/raporlar" role="button">Raporlar</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Şehir
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/amsterdam"><img src="{{ url_for('static', filename='images/nl.png') }}" class="icon-adjust" width="16" height="16">  Amsterdam</a></li>
+              <li><a class="dropdown-item" href="/"><img src="{{ url_for('static', filename='images/ch.png') }}" class="icon-adjust" width="16" height="16">  Basel</a></li>
+              <li><a class="dropdown-item" href="/berlin"><img src="{{ url_for('static', filename='images/de.png') }}" class="icon-adjust" width="16" height="16">  Berlin</a></li>
+              <li><a class="dropdown-item" href="/istanbul"><img src="{{ url_for('static', filename='images/tr.png') }}" class="icon-adjust" width="16" height="16">  İstanbul</a></li>
+              <li><a class="dropdown-item" href="/londra"><img src="{{ url_for('static', filename='images/gb.png') }}" class="icon-adjust" width="16" height="16">  Londra</a></li>
+              <li><a class="dropdown-item" href="/madrid"><img src="{{ url_for('static', filename='images/es.png') }}" class="icon-adjust" width="16" height="16">  Madrid</a></li>
+              <li><a class="dropdown-item" href="/paris"><img src="{{ url_for('static', filename='images/fr.png') }}" class="icon-adjust" width="16" height="16">  Paris</a></li>
+              <li><a class="dropdown-item" href="/roma"><img src="{{ url_for('static', filename='images/it.png') }}" class="icon-adjust" width="16" height="16">  Roma</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item disabled-text" href="#">Başka bir şehir yok.</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <li class="nav-item col-6 col-lg-auto"></li>
+        <a class="navbar-link" href="https://github.com/ardahanaytan"         target="_blank">
+          <img src="{{ url_for('static', filename='images/github.png') }}" alt="logo" width="30" height="30">
+        </a>
+      </li>
+      <li class="nav-item col-6 col-lg-auto"></li>
+        <a class="navbar-link" href="https://www.linkedin.com/in/ardahan-aytan/"         target="_blank">
+          <img src="{{ url_for('static', filename='images/linkedin.png') }}" alt="logo" width="30" height="30">
+        </a>
+      </li>
+      <li class="nav-item col-6 col-lg-auto">
+        <a class="navbar-link2" href="https://www.instagram.com/ardahanaytan/" target="_blank">
+          <img src="{{ url_for('static', filename='images/instagram.png') }}" alt="logo" width="30" height="30">
+        </a>
+      </li>
+    </div>
+  </nav>

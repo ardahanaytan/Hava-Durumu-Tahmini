@@ -2,8 +2,6 @@
 <html lang="en">
 <head>
     {% include 'head_links.html' %}
-    <link rel="icon" type="image/icon" href="{{ url_for('static', filename='images/cloudy.png') }}">
-    <title>HavAI Durumu</title>
     <style>
         body {
             background-color: #222529;
@@ -13,8 +11,11 @@
             font-size: 1.8rem;
         }
         .navbar-nav {
-            margin-left: 4rem;
+            margin-left: 2rem;
             font-size: 1.5rem;
+        }
+        .navbar-nav .nav-link {
+            margin-left: 30px;
         }
         .disabled-text {
             pointer-events: none;
@@ -44,7 +45,7 @@
         }
         .custom-box .box-content {
             margin-top: 20px;
-            padding: 10px;
+            padding: 10px;  
             background-color: #727375; 
             height: 130px;
             font-size: 20px;
@@ -60,12 +61,12 @@
             align-items: center;
             justify-content: center; /* Görüntüyü merkezler */
             margin-left: 25px;
-            border: 3px solid white; /* Beyaz sınır */
         }
-
         .image-wrapper img {
-            width: 100%;
-            height: auto;
+            width: 100px; /* Fotoğrafın genişliğini çerçeveye uydurur */
+            height: 100px; /* Fotoğrafın yüksekliğini çerçeveye uydurur */
+            object-fit: cover; /* Fotoğrafın alanı tamamen kaplamasını sağlar */
+            object-position: center; /* Fotoğrafın ortasını gösterir */
         }
         .text-section {
             height: 110px;
@@ -86,11 +87,24 @@
         .text-box p {
             margin: 5px 0; /* Üst ve alt margin'i 5px'e düşürüyoruz */
         }
+        .values-container {
+            display: flex;
+            justify-content: center;
+            align-items: baseline;
+        }
         .text-box .value{
             font-family: 'Lato', sans-serif;
             font-size: 50px;
             font-weight: bold;
             color: rgba(255, 255, 255, 0.812);
+            margin: 12px; /* Ekstra margin kaldırıldı */
+            line-height: 1; /* Satır yüksekliğini sıkılaştır */
+        }
+        .text-box .valuemin{
+            font-family: 'Lato', sans-serif;
+            font-size: 40px;
+            font-weight: bold;
+            color: rgba(255, 255, 255, 0.512);
             margin: 12px; /* Ekstra margin kaldırıldı */
             line-height: 1; /* Satır yüksekliğini sıkılaştır */
         }
@@ -126,10 +140,6 @@
             justify-content: center;
             align-items: center;
         }
-        .custom-box .box-content img{
-            max-width: 40px;
-            margin-bottom: 10px;
-        }
         .custom-box .box-content-2 img{
             max-width: 40px;
             margin-bottom: 10px;
@@ -144,6 +154,7 @@
             height: 200px;
             text-align: center;
             padding: 10px;
+            color : rgba(255, 255, 255, 0.812);
             background-color: #727375; /* Butonların arka plan rengi */
             border: none;
             cursor: pointer; /* Buton üzerinde fare imlecini göster */
@@ -155,53 +166,29 @@
             width: 50px;
             height: 50px;
         }
+        .temp-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .temperature {
+            font-size: 20px;
+            font-weight: bold;
+            color: rgba(255, 255, 255, 0.812);
+        }
+        .mintemp {
+            font-size: 15px;
+            font-weight: bold;
+            color: rgba(255, 255, 255, 0.512);
+        }
     </style>
 </head>
 
 <body>
     {% include 'body_links.html' %}
 
-    <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="/"> <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo" width="42" height="42" class="d-inline-block align-bottom"> HavAI Durumu</a>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Şehir
-                </a>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="/amsterdam"><img src="{{ url_for('static', filename='images/nl.png') }}" class="icon-adjust" width="16" height="16">  Amsterdam</a></li>
-                  <li><a class="dropdown-item" href="/"><img src="{{ url_for('static', filename='images/ch.png') }}" class="icon-adjust" width="16" height="16">  Basel</a></li>
-                  <li><a class="dropdown-item" href="/berlin"><img src="{{ url_for('static', filename='images/de.png') }}" class="icon-adjust" width="16" height="16">  Berlin</a></li>
-                  <li><a class="dropdown-item" href="/istanbul"><img src="{{ url_for('static', filename='images/tr.png') }}" class="icon-adjust" width="16" height="16">  İstanbul</a></li>
-                  <li><a class="dropdown-item" href="/londra"><img src="{{ url_for('static', filename='images/gb.png') }}" class="icon-adjust" width="16" height="16">  Londra</a></li>
-                  <li><a class="dropdown-item" href="/madrid"><img src="{{ url_for('static', filename='images/es.png') }}" class="icon-adjust" width="16" height="16">  Madrid</a></li>
-                  <li><a class="dropdown-item" href="/paris"><img src="{{ url_for('static', filename='images/fr.png') }}" class="icon-adjust" width="16" height="16">  Paris</a></li>
-                  <li><a class="dropdown-item" href="/roma"><img src="{{ url_for('static', filename='images/it.png') }}" class="icon-adjust" width="16" height="16">  Roma</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item disabled-text" href="#">Başka bir şehir yok.</a></li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-          <li class="nav-item col-6 col-lg-auto"></li>
-            <a class="navbar-link" href="https://github.com/ardahanaytan"         target="_blank">
-              <img src="{{ url_for('static', filename='images/github.png') }}" alt="logo" width="30" height="30">
-            </a>
-          </li>
-          <li class="nav-item col-6 col-lg-auto"></li>
-            <a class="navbar-link" href="https://www.linkedin.com/in/ardahan-aytan/"         target="_blank">
-              <img src="{{ url_for('static', filename='images/linkedin.png') }}" alt="logo" width="30" height="30">
-            </a>
-          </li>
-          <li class="nav-item col-6 col-lg-auto">
-            <a class="navbar-link2" href="https://www.instagram.com/ardahanaytan/" target="_blank">
-              <img src="{{ url_for('static', filename='images/instagram.png') }}" alt="logo" width="30" height="30">
-            </a>
-          </li>
-        </div>
-      </nav>
+    {% include 'navbar.html' %}
 
       <div class="container" style="margin-top: 40px;"></div>
         <div class="row justify-content-center">
@@ -212,12 +199,15 @@
                     </div>
                     <div class="box-content">
                       <div class="image-wrapper">
-                        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="admin" class="img-fluid">
+                        <img src="{{ url_for('static', filename='images/snowy.png') }}" alt="admin" class="d-inline-block">
                       </div>
                       <div class="text-section">
                         <div class="text-box">
                             <p>Sıcaklık (°C)</p>
-                            <p class="value"> 25 </p>
+                            <div class="values-container">
+                              <p class="value"> 25 </p>
+                              <p class="valuemin"> 20 </p>
+                            </div>
                         </div>
                         <div class="text-box">
                             <p>Nem (%)</p>
@@ -255,18 +245,60 @@
                   </div>
                   <div class="box-content-3">
                     <div class="days">
-                      <button class="day">Pzt<br><img src="{{ url_for('static', filename='images/logo.png') }}" alt="admin" class="img-fluid"><br>25°C</button>
-                      <button class="day">Sal<br><img src="{{ url_for('static', filename='images/logo.png') }}" alt="admin" class="img-fluid"><br>28°C</button>
-                      <button class="day">Çar<br><img src="{{ url_for('static', filename='images/logo.png') }}" alt="admin" class="img-fluid"><br>30°C</button>
-                      <button class="day">Per<br><img src="{{ url_for('static', filename='images/logo.png') }}" alt="admin" class="img-fluid"><br>27°C</button>
-                      <button class="day">Cum<br><img src="{{ url_for('static', filename='images/logo.png') }}" alt="admin" class="img-fluid"><br>26°C</button>
-                      <button class="day">Cmt<br><img src="{{ url_for('static', filename='images/logo.png') }}" alt="admin" class="img-fluid"><br>29°C</button>
-                      <button class="day">Paz<br><img src="{{ url_for('static', filename='images/logo.png') }}" alt="admin" class="img-fluid"><br>24°C</button>
+                      <button class="day">Pzt<br>
+                        <img src="{{ url_for('static', filename='images/sunny.png') }}" alt="admin" class="img-fluid">
+                        <div class="temp-container">
+                          <span class="temperature">25°C</span>
+                          <span class="mintemp">20°C</span>
+                        </div>
+                      </button>
+                      <button class="day">Sal<br>
+                        <img src="{{ url_for('static', filename='images/sunny-cloud.png') }}" alt="admin" class="img-fluid">
+                        <div class="temp-container">
+                          <span class="temperature">28°C</span>
+                          <span class="mintemp">23°C</span>
+                        </div>
+                      </button>
+                      <button class="day">Çarş<br>
+                        <img src="{{ url_for('static', filename='images/cloudy.png') }}" alt="admin" class="img-fluid">
+                        <div class="temp-container">
+                          <span class="temperature">30°C</span>
+                          <span class="mintemp">25°C</span>
+                        </div>
+                      </button>
+                      <button class="day">Perş<br>
+                        <img src="{{ url_for('static', filename='images/rainy.png') }}" alt="admin" class="img-fluid">
+                        <div class="temp-container">
+                          <span class="temperature">27°C</span>
+                          <span class="mintemp">22°C</span>
+                        </div>
+                      </button>
+                      <button class="day">Cum<br>
+                        <img src="{{ url_for('static', filename='images/snowy.png') }}" alt="admin" class="img-fluid">
+                        <div class="temp-container">
+                          <span class="temperature">26°C</span>
+                          <span class="mintemp">21°C</span>
+                        </div>
+                      </button>
+                      <button class="day">Cmt<br>
+                        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="admin" class="img-fluid">
+                        <div class="temp-container">
+                          <span class="temperature">29°C</span>
+                          <span class="mintemp">24°C</span>
+                        </div>
+                      </button>
+                      <button class="day">Paz<br>
+                        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="admin" class="img-fluid">
+                        <div class="temp-container">
+                          <span class="temperature">24°C</span>
+                          <span class="mintemp">19°C</span>
+                        </div>
+                      </button>
                     </div>
                   </div>
                 </div>
             </div>
-        </div>
+      </div>
     </div>
 </body>
 </html>
