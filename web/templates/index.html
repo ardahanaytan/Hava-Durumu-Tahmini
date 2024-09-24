@@ -119,6 +119,8 @@
         .text-box img {
             margin: 10px; /* Ekstra margin kaldırıldı */
             line-height: 1; /* Satır yüksekliğini sıkılaştır */
+            transition: transform 0.5s ease; /* Dönüşümleri 0.5 saniyede yapar */
+            transform-origin: 50% 50%; /* Dönüşümün merkezini belirler */
         }
         .custom-box .box-content-2 {
             margin-top: 2px;
@@ -132,7 +134,7 @@
         }
         .custom-box .box-content-3 {
             margin-top: 20px;
-            padding: 10px;
+            padding: 0px;
             background-color: #727375; 
             height: 200px;
             font-size: 20px;
@@ -182,6 +184,12 @@
             font-weight: bold;
             color: rgba(255, 255, 255, 0.512);
         }
+        .day:hover {
+            background-color: #5d5e5e; /* Buton üzerine gelindiğinde arka plan rengi */
+        }
+        .day:active {
+            background-color: #727375; /* Butona tıklandığında arka plan rengi */
+        }
     </style>
 </head>
 
@@ -199,23 +207,23 @@
                     </div>
                     <div class="box-content">
                       <div class="image-wrapper">
-                        <img src="{{ url_for('static', filename='images/snowy.png') }}" alt="admin" class="d-inline-block">
+                        <img id="weather-image" src="{{ url_for('static', filename='images/severe-weather.png') }}" alt="admin" class="d-inline-block"> 
                       </div>
                       <div class="text-section">
                         <div class="text-box">
                             <p>Sıcaklık (°C)</p>
                             <div class="values-container">
-                              <p class="value"> 25 </p>
-                              <p class="valuemin"> 20 </p>
+                              <p id='temp' class="value">{{df_sicaklikmax_dict[0]['yhat_upper']}}</p>
+                              <p id='mintemp' class="valuemin">{{df_sicaklikmin_dict[0]['yhat_lower']}}</p>
                             </div>
                         </div>
                         <div class="text-box">
                             <p>Nem (%)</p>
-                            <p class="value"> 55 </p>
+                            <p id='humidity' class="value">{{df_nem_dict[0]['yhat']}}</p>
                         </div>
                         <div class="text-box">
                             <p>Bulut Yoğunluğu (%)</p>
-                            <p class="value"> 12 </p>
+                            <p id='cloud' class="value">{{df_bulut_dict[0]['yhat']}}</p>
                         </div>
                       </div>
                     </div>
@@ -223,75 +231,75 @@
                       <div class="text-section">
                         <div class="text-box">
                             <p>Basınç (hPa)</p>
-                            <p class="value2"> 1010 </p>
+                            <p id='pressure' class="value2"> {{df_basinc_dict[0]['yhat']}} </p>
                         </div>
                         <div class="text-box">
                             <p>Yağmur Miktarı (%)</p>
-                            <p class="value2"> 1.2 </p>
+                            <p id='rain' class="value2">{{df_yagmur_dict[0]['yhat']}}</p>
                         </div>
                         <div class="text-box">
                             <p>Kar Miktarı (%)</p>
-                            <p class="value2"> 0 </p>
+                            <p id='snow' class="value2">{{df_kar_dict[0]['yhat']}}</p>
                         </div>
                         <div class="text-box">
                             <p>Rüzgar Hızı (km/h)</p>
-                            <p class="value2"> 14 </p>
+                            <p id="wind-speed" class="value2">{{df_ruzgarhizi_dict[0]['yhat']}}</p>
                         </div>
                         <div class="text-box">
                             <p>Rüzgar Yönü</p>
-                            <img src="{{ url_for('static', filename='images/arrow-up.png') }}" alt="admin" class="img-fluid">
+                            <img id="wind-direction" src="{{ url_for('static', filename='images/arrow-up.png') }}" alt="admin" class="img-fluid">
                         </div>
                       </div>
                   </div>
                   <div class="box-content-3">
                     <div class="days">
-                      <button class="day">Pzt<br>
-                        <img src="{{ url_for('static', filename='images/sunny.png') }}" alt="admin" class="img-fluid">
+                      <button class="day" onclick="changeWeather(0, 'arrow-up.png')">{{df_basinc_dict[0]['ds']}}<br>
+                        <img id="button-image0" src="{{ url_for('static', filename='images/sunny.png') }}" alt="admin" class="img-fluid">
                         <div class="temp-container">
-                          <span class="temperature">25°C</span>
-                          <span class="mintemp">20°C</span>
+                          <span class="temperature">{{df_sicaklikmax_dict[0]['yhat_upper']}}</span>
+                          <span class="mintemp">{{df_sicaklikmin_dict[0]['yhat_lower']}}</span>
                         </div>
                       </button>
-                      <button class="day">Sal<br>
-                        <img src="{{ url_for('static', filename='images/sunny-cloud.png') }}" alt="admin" class="img-fluid">
+                      <button class="day" onclick="changeWeather(1, 'arrow-up.png')">{{df_basinc_dict[1]['ds']}}<br>
+                        <img id="button-image1" src="{{ url_for('static', filename='images/sunny-cloud.png') }}" alt="admin" class="img-fluid">
                         <div class="temp-container">
-                          <span class="temperature">28°C</span>
-                          <span class="mintemp">23°C</span>
+                          <span class="temperature">{{df_sicaklikmax_dict[1]['yhat_upper']}}</span>
+                          <span class="mintemp">{{df_sicaklikmin_dict[1]['yhat_lower']}}</span>
                         </div>
                       </button>
-                      <button class="day">Çarş<br>
-                        <img src="{{ url_for('static', filename='images/cloudy.png') }}" alt="admin" class="img-fluid">
+                      <button class="day" onclick="changeWeather(2, 'arrow-up.png')">{{df_basinc_dict[2]['ds']}}<br>
+                        <img id="button-image2" src="{{ url_for('static', filename='images/cloudy.png') }}" alt="admin" class="img-fluid">
                         <div class="temp-container">
-                          <span class="temperature">30°C</span>
-                          <span class="mintemp">25°C</span>
+                          <span class="temperature">{{df_sicaklikmax_dict[2]['yhat_upper']}}</span>
+                          <span class="mintemp">{{df_sicaklikmin_dict[2]['yhat_lower']}}</span>
                         </div>
                       </button>
-                      <button class="day">Perş<br>
-                        <img src="{{ url_for('static', filename='images/rainy.png') }}" alt="admin" class="img-fluid">
+                      <button class="day" onclick="changeWeather(3, 'arrow-up.png')">{{df_basinc_dict[3]['ds']}}<br>
+                        <img id="button-image3" src="{{ url_for('static', filename='images/rainy.png') }}" alt="admin" class="img-fluid">
                         <div class="temp-container">
-                          <span class="temperature">27°C</span>
-                          <span class="mintemp">22°C</span>
+                          <span class="temperature">{{df_sicaklikmax_dict[3]['yhat_upper']}}</span>
+                          <span class="mintemp">{{df_sicaklikmin_dict[3]['yhat_lower']}}</span>
                         </div>
                       </button>
-                      <button class="day">Cum<br>
-                        <img src="{{ url_for('static', filename='images/snowy.png') }}" alt="admin" class="img-fluid">
+                      <button class="day" onclick="changeWeather(4, 'arrow-up.png')">{{df_basinc_dict[4]['ds']}}<br>
+                        <img id="button-image4" src="{{ url_for('static', filename='images/snowy.png') }}" alt="admin" class="img-fluid">
                         <div class="temp-container">
-                          <span class="temperature">26°C</span>
-                          <span class="mintemp">21°C</span>
+                          <span class="temperature">{{df_sicaklikmax_dict[4]['yhat_upper']}}</span>
+                          <span class="mintemp">{{df_sicaklikmin_dict[4]['yhat_lower']}}</span>
                         </div>
                       </button>
-                      <button class="day">Cmt<br>
-                        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="admin" class="img-fluid">
+                      <button class="day" onclick="changeWeather(5, 'arrow-up.png')">{{df_basinc_dict[5]['ds']}}<br>
+                        <img id="button-image5" src="{{ url_for('static', filename='images/logo.png') }}" alt="admin" class="img-fluid">
                         <div class="temp-container">
-                          <span class="temperature">29°C</span>
-                          <span class="mintemp">24°C</span>
+                          <span class="temperature">{{df_sicaklikmax_dict[5]['yhat_upper']}}</span>
+                          <span class="mintemp">{{df_sicaklikmin_dict[5]['yhat_lower']}}</span>
                         </div>
                       </button>
-                      <button class="day">Paz<br>
-                        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="admin" class="img-fluid">
+                      <button class="day" onclick="changeWeather(6, 'arrow-up.png')">{{df_basinc_dict[6]['ds']}}<br>
+                        <img id="button-image6" src="{{ url_for('static', filename='images/logo.png') }}" alt="admin" class="img-fluid">
                         <div class="temp-container">
-                          <span class="temperature">24°C</span>
-                          <span class="mintemp">19°C</span>
+                          <span class="temperature">{{df_sicaklikmax_dict[6]['yhat_upper']}}</span>
+                          <span class="mintemp">{{df_sicaklikmin_dict[6]['yhat_lower']}}</span>
                         </div>
                       </button>
                     </div>
@@ -300,5 +308,100 @@
             </div>
       </div>
     </div>
+    <script>
+      var yhat = {{ df_ruzgaryonu_dict[0]['yhat'] }};
+  
+      function rotateWindDirection(angle) {
+          var img = document.getElementById('wind-direction');
+          img.classList.add('rotated');
+          img.style.transform = 'rotate(' + angle + 'deg)';
+      }
+      rotateWindDirection(yhat);
+  </script>
+
+    <script>
+      const weatherData = {
+          sicaklikmax: {{ df_sicaklikmax_dict | tojson }},
+          sicaklikmin: {{ df_sicaklikmin_dict | tojson }},
+          nem: {{ df_nem_dict | tojson }},
+          bulut: {{ df_bulut_dict | tojson }},
+          basinc: {{ df_basinc_dict | tojson }},
+          yagmur: {{ df_yagmur_dict | tojson }},
+          kar: {{ df_kar_dict | tojson }},
+          ruzgarhizi: {{ df_ruzgarhizi_dict | tojson }},
+          ruzgaryonu: {{ df_ruzgaryonu_dict | tojson }}
+      };
+
+      function changeWeather(i, windDirection) {
+          document.getElementById('weather-image').src = "{{ url_for('static', filename='images/') }}" + determinePhoto(i);
+
+          document.getElementById('temp').textContent = weatherData.sicaklikmax[i].yhat_upper;
+          document.getElementById('mintemp').textContent = weatherData.sicaklikmin[i].yhat_lower;
+          document.getElementById('humidity').textContent = weatherData.nem[i].yhat;
+          document.getElementById('cloud').textContent = weatherData.bulut[i].yhat;
+          document.getElementById('pressure').textContent = weatherData.basinc[i].yhat;
+          document.getElementById('rain').textContent = weatherData.yagmur[i].yhat;
+          document.getElementById('snow').textContent = weatherData.kar[i].yhat;
+          document.getElementById('wind-speed').textContent = weatherData.ruzgarhizi[i].yhat;
+          var windDirectionElement = document.getElementById('wind-direction'); 
+          windDirectionElement.style.transform = 'rotate(' + weatherData.ruzgaryonu[i].yhat + 'deg)';
+          windDirectionElement.style.transformOrigin = '50% 50%';
+      }
+
+      function determinePhoto(i){
+          if (weatherData.kar[i].yhat >= 2) {
+              return 'snowy.png';
+          } else if (weatherData.yagmur[i].yhat >= 4) {
+              return 'rainy.png';
+          } else if (weatherData.bulut[i].yhat >= 66) {
+              return 'cloudy.png';
+          } else if (weatherData.bulut[i].yhat > 33) {
+              return 'sunny-cloud.png';
+          } else {
+              return 'rainy.png';
+          }
+      }
+
+      function updateWeatherImage() {
+            var imageElement = document.getElementById('weather-image');
+            var photo = determinePhoto(0);
+
+            imageElement.src = "{{ url_for('static', filename='images/') }}" + photo;
+        }
+
+      function updateButtonImage(i){
+        if (i == 0) {
+          var imageElement = document.getElementById('button-image0');
+        } else if (i == 1) {
+          var imageElement = document.getElementById('button-image1');
+        } else if (i == 2) {
+          var imageElement = document.getElementById('button-image2');
+        } else if (i == 3) {
+          var imageElement = document.getElementById('button-image3');
+        } else if (i == 4) {
+          var imageElement = document.getElementById('button-image4');
+        } else if (i == 5) {
+          var imageElement = document.getElementById('button-image5');
+        } else if (i == 6) {
+          var imageElement = document.getElementById('button-image6');
+        }
+            var photo = determinePhoto(i);
+
+            imageElement.src = "{{ url_for('static', filename='images/') }}" + photo;
+      }
+
+        window.onload = function() {
+            updateWeatherImage();
+            updateButtonImage(0);
+            updateButtonImage(1);
+            updateButtonImage(2);
+            updateButtonImage(3);
+            updateButtonImage(4);
+            updateButtonImage(5);
+            updateButtonImage(6);
+        };
+  </script>
+
+  
 </body>
 </html>

@@ -16,3 +16,6 @@ df_ort.rename(columns = {'Yagmur': 'mean'}, inplace=True)
 df_ = pd.concat([df_top, df_ort, df_max, df_min], axis=1)
 
 error, combined, future = create_predictions(df_)
+future['yhat'] = ((future['yhat'] - future['yhat'].min()) / (future['yhat'].max() - future['yhat'].min())) * (df['Yagmur'].max() - df['Yagmur'].min()) + df['Yagmur'].min()
+yagmur_forecast = future[['ds','yhat']].tail(7)
+yagmur_forecast.yhat = yagmur_forecast.yhat.round(1)

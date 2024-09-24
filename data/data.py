@@ -1,12 +1,12 @@
 import pandas as pd
 
-df_basinc = pd.read_csv('data/weather_datas/basinc.csv')
-df_bulut = pd.read_csv('data/weather_datas/bulut.csv')
-df_nem = pd.read_csv('data/weather_datas/nem.csv')
-df_ruzgar = pd.read_csv('data/weather_datas/ruzgar.csv')
-df_sicaklik = pd.read_csv('data/weather_datas/sicaklik.csv')
-df_yagmur = pd.read_csv('data/weather_datas/yagmur.csv')
-df_kar = pd.read_csv('data/weather_datas/kar.csv')
+df_basinc = pd.read_csv('/Users/ardahanaytan/Desktop/STAJ/Hava Durumu Tahmin Projesi/data/weather_datas/basinc.csv')
+df_bulut = pd.read_csv('/Users/ardahanaytan/Desktop/STAJ/Hava Durumu Tahmin Projesi/data/weather_datas/bulut.csv')
+df_nem = pd.read_csv('/Users/ardahanaytan/Desktop/STAJ/Hava Durumu Tahmin Projesi/data/weather_datas/nem.csv')
+df_ruzgar = pd.read_csv('/Users/ardahanaytan/Desktop/STAJ/Hava Durumu Tahmin Projesi/data/weather_datas/ruzgar.csv')
+df_sicaklik = pd.read_csv('/Users/ardahanaytan/Desktop/STAJ/Hava Durumu Tahmin Projesi/data/weather_datas/sicaklik.csv')
+df_yagmur = pd.read_csv('/Users/ardahanaytan/Desktop/STAJ/Hava Durumu Tahmin Projesi/data/weather_datas/yagmur.csv')
+df_kar = pd.read_csv('/Users/ardahanaytan/Desktop/STAJ/Hava Durumu Tahmin Projesi/data/weather_datas/kar.csv')
 
 tables = [df_nem, df_ruzgar, df_sicaklik, df_yagmur, df_kar]
 df = pd.merge(df_basinc, df_bulut, on=['location'])

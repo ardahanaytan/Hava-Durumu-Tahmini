@@ -16,6 +16,6 @@ df_sum.rename(columns = {'Ruzgar_Yonu': 'sum'}, inplace=True)
 df_ = pd.concat([df_sum, df_ort, df_max, df_min], axis=1)
 
 error, combined, future = create_predictions_mean(df_)
-
-##VERILER GUNCELLENDIKTEN SONRA TEKRAR BAKILACAK
-##VERILERI GENISLETMEYI DENE
+future['yhat'] = ((future['yhat'] - future['yhat'].min()) / (future['yhat'].max() - future['yhat'].min())) * (df['Ruzgar_Yonu'].max() - df['Ruzgar_Yonu'].min()) + df['Ruzgar_Yonu'].min()
+ruzgaryonu_forecast = future[['ds','yhat']].tail(7)
+ruzgaryonu_forecast.yhat = ruzgaryonu_forecast.yhat.round(2)

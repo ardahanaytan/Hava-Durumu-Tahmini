@@ -14,6 +14,6 @@ df_ort.rename(columns = {'Nem': 'mean'}, inplace=True)
 df_ = pd.concat([df_ort, df_max, df_min], axis=1)
 
 error, combined, future = create_predictions_withoutsum(df_)
-#future[['yhat_lower', 'yhat_upper', 'yhat']] -= 45
-#TAM OLARAK OLMAMIS BI KONTROL EDILECEK
-#YENI VERILER ILE DAHA IYI OLABILIR VERILERIN BITTIGI HAFTA NEM COK YUKSEKMIS, MODELDE DAHA DA YUKSELMEYE DEVAM EDIYOR
+future['yhat'] = ((future['yhat'] - future['yhat'].min()) / (future['yhat'].max() - future['yhat'].min())) * (df['Nem'].max() - df['Nem'].min()) + df['Nem'].min()
+nem_forecast = future[['ds','yhat']].tail(7)
+nem_forecast.yhat = nem_forecast.yhat.round(1)

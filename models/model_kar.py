@@ -16,4 +16,7 @@ df_ort.rename(columns = {'Kar': 'mean'}, inplace=True)
 df_ = pd.concat([df_top, df_ort, df_max, df_min], axis=1)
 
 error, combined, future= create_predictions(df_)
+future['yhat'] = ((future['yhat'] - future['yhat'].min()) / (future['yhat'].max() - future['yhat'].min())) * (df['Kar'].max() - df['Kar'].min()) + df['Kar'].min()
+kar_forecast = future[['ds','yhat']].tail(7)
+kar_forecast.yhat = kar_forecast.yhat.round()
 

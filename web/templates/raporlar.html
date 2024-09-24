@@ -31,11 +31,92 @@
         .navbar-link2 {
             margin-right: 4rem;
         }
+        .custom-box {
+            border: 3px solid #727375; 
+            padding: 20px;
+            margin-top: 180px;
+        }
+        .custom-box .box-content {
+            padding: 0px;
+            background-color: #727375; 
+            height: 352px;
+            font-size: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .raporlar {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 100%;
+        }
+        .rapor {
+            flex: 1;
+            height: 200px;
+            text-align: center;
+            padding: 10px;
+            color : rgba(255, 255, 255, 0.812);
+            margin-bottom: 1px;
+            background-color: #727375; /* Butonların arka plan rengi */
+            border: none;
+            cursor: pointer; /* Buton üzerinde fare imlecini göster */
+            font-size: 16px; /* Buton yazı boyutu */
+        }
+        .rapor:hover {
+            background-color: #5d5e5e; /* Buton üzerine gelindiğinde arka plan rengi */
+        }
+        .rapor:active {
+            background-color: #727375; /* Butona tıklandığında arka plan rengi */
+        }
+        .custom-box-2 {
+            border: 3px solid #727375; 
+            padding: 20px;
+            margin-top: 100px;
+            margin-left: 50px;
+        }
+        .custom-box-2 .box-content-2 {
+            background-color: #727375; 
+            height: 500px;
+            font-size: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
     </style>
 </head>
 <body>
     {% include 'body_links.html' %}
 
     {% include 'navbar.html' %}
+
+    <div class="container d-flex justify-content-start align-items-center" style="height: 80vh;">
+        <div class="row w-100">
+            <div class="col-md-3">
+                <div class="custom-box">
+                    <div class="box-content">
+                        <div class="raporlar">
+                            <button class="rapor">Basınç Grafiği<br></button>
+                            <button class="rapor">Bulut Grafiği<br></button>
+                            <button class="rapor">Kar Grafiği<br></button>
+                            <button class="rapor">Nem Grafiği<br></button>
+                            <button class="rapor">Rüzgar Hızı Grafiği<br></button>
+                            <button class="rapor">Rüzgar Yönü Grafiği<br></button>
+                            <button class="rapor">Sıcaklık Grafiği<br></button>
+                            <button class="rapor">Yağmur Grafiği<br></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="custom-box-2">
+                    <div class="box-content-2">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
 </body>
 </html>
